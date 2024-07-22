@@ -7,3 +7,6 @@ def index(request):
     html = "<html><body><img src='https://upyachka.io/img/kot/77.gif' alt=\"UPYACHKA\"></body></html>"
     return HttpResponse(html)
 
+def main(request):
+    html = "main.html"
+    return HttpResponse(html)
