@@ -5,6 +5,6 @@ from .views import test
 
 urlpatterns = [
     path("", main),
-    path("", test),
+    #path("", test),
     
 ]
