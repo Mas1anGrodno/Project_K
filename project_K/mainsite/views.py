@@ -7,4 +7,4 @@ def main(request):
     return render(request, 'main.html')
 
 def test(request):
-    return HttpResponse("TSTSTSTST")
+    return HttpResponse(f"<h1> TSTSTSTST </h1>")
