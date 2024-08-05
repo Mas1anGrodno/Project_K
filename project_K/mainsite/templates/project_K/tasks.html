@@ -1,0 +1,10 @@
+{% extends 'project_K/base.html' %} {% block content %}
+<h1>Все Задачи</h1>
+{%for a in tasks %}
+<h2>{{ a.task_name }}</h2>
+<b>{{ a.task_desc }}</b>
+<div align="left">{{ a.task_proj }}</div>
+<div align="left">{{ a.priority }}</div>
+
+<hr />
+{% endfor %} {% endblock %}

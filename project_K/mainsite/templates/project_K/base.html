@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        background-color: #edf4fc;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        #border-radius: 50%;
+        background-color: #333;
+      }
+
+      li {
+        float: left;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+      li a:hover:not(.active) {
+        background-color: #5d95e3;
+      }
+
+      .active {
+        background-color: #207fb3;
+      }
+
+      nav {
+        display: block;
+      }
+    </style>
+    <title>{{ title }}</title>
+  </head>
+
+  <body>
+    {% block mainmenu %}
+    <nav>
+      <ul>
+        {% for item in menu %}
+        <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+    {% endblock %}
+
+    <div align="center">{% block content %} {% endblock %}</div>
+  </body>
+</html>

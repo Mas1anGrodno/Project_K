@@ -12,21 +12,24 @@ class Project(models.Model):
         verbose_name = "Проект"
         verbose_name_plural = "Проект"
         ordering = ["proj_create"]
+
+    def __str__(self):
+      return self.proj_name
 # Модель Task должна представлять собой задачу, принадлежащую определённому проекту, с полями названия, описания, статуса и приоритета.
 class Tasks(models.Model):
     
     STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('in_progress', 'In Progress'),
-        ('completed', 'Completed'),
+        ('pending', 'Ожидает'),
+        ('in_progress', 'В процессе'),
+        ('completed', 'Готово'),
     ]
     PRIORITY_CHOICES = [
-        ('low', 'Low'),
-        ('medium', 'Medium'),
-        ('high', 'High'),
+        ('low', 'Низкий'),
+        ('medium', 'Средний'),
+        ('high', 'Высокий'),
     ]
 
-    task_proj = models.ForeignKey(Project, to_field='proj_name', on_delete=models.CASCADE, related_name='tasks')
+    task_proj = models.ForeignKey(Project, to_field='proj_name', on_delete=models.CASCADE, related_name='tasks', verbose_name="Проект")
     task_name = models.CharField(max_length=255, verbose_name="Задача")
     task_desc = models.TextField(blank=True, verbose_name="Описание проекта")
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', verbose_name="Статус задачи")
@@ -36,7 +39,8 @@ class Tasks(models.Model):
         verbose_name = "Задачи"
         verbose_name_plural = "Задачи"
         ordering = ["priority"]
-
+        
 # Don't forget 
 # python manage.py makemigrations
 # python manage.py migrate
+
