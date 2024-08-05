@@ -19,5 +19,4 @@ class AddTask(forms.ModelForm):
         widgets = {
             'task_name': forms.TextInput(attrs={'class': 'form-input'}),
             'task_desc': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
-            'task_proj': forms.ChoiceField()
         }

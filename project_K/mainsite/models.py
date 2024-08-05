@@ -24,9 +24,9 @@ class Tasks(models.Model):
         ('completed', 'Готово'),
     ]
     PRIORITY_CHOICES = [
-        ('low', 'Низкий'),
-        ('medium', 'Средний'),
-        ('high', 'Высокий'),
+        ('Низкий', 'Низкий'),
+        ('Средний', 'Средний'),
+        ('Высокий', 'Высокий'),
     ]
 
     task_proj = models.ForeignKey(Project, to_field='proj_name', on_delete=models.CASCADE, related_name='tasks', verbose_name="Проект")
