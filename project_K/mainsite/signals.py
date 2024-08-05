@@ -14,6 +14,8 @@ def user_log(sender, instance, **kwargs):
         print("задача удалена")
 
 @receiver(post_save, sender=User) 
-def notify_superuser_creation(sender, instance, created, **kwargs):
-    if created and instance.is_superuser:
-        print(f'User {instance.username} has been created.')
+def notify_user_creation(sender, instance, created, **kwargs):
+    if instance.is_superuser == True:
+        print(f"Superuser permissions granted to {instance.username}  --> Superuser status - {instance.is_superuser}")
+    elif created :
+        print(f"User added - id({instance.id}) {instance.username} Active - {instance.is_active}")

@@ -12,3 +12,5 @@ class TasksAdmin(admin.ModelAdmin):
     list_display = ("id","task_name", "status", "priority")
 
 admin.site.register(Tasks,TasksAdmin)
+
+# TEvCKYp9thef.97
