@@ -11,7 +11,6 @@
         margin: 0;
         padding: 0;
         overflow: hidden;
-        #border-radius: 50%;
         background-color: #333;
       }
 
@@ -38,6 +37,31 @@
       nav {
         display: block;
       }
+      h3 {
+        position: absolute;
+        margin-right: 1rem;
+        bottom: 0px;
+      }
+      /* Стили для футера */
+      .footer {
+        background-color: #207fb3;
+        color: #fff;
+        padding: 5px;
+        text-align: left;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .footer .container {
+        max-width: 100%%;
+        margin: 0 auto;
+      }
+
+      .footer h2 {
+        margin-top: 0;
+        font-size: 0.6em;
+      }
     </style>
     <title>{{ title }}</title>
   </head>
@@ -54,5 +78,14 @@
     {% endblock %}
 
     <div align="center">{% block content %} {% endblock %}</div>
+    <h3 align="center">
+      {% block footer %}
+      <footer class="footer">
+        <div class="container">
+          <h2>{{footer}}</h2>
+        </div>
+      </footer>
+      {% endblock %}
+    </h3>
   </body>
 </html>
