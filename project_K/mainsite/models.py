@@ -4,7 +4,7 @@ from django.db import models
 
 # Модель Project должна представлять собой проект с полями названия, описания и даты создания.
 class Project(models.Model):
-    proj_name = models.CharField(max_length=255, verbose_name="Название проекта")
+    proj_name = models.CharField(max_length=255, unique=True, verbose_name="Название проекта")
     proj_desc = models.TextField(blank=True, verbose_name="Описание задачи")
     proj_create = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания проекта")
 
@@ -26,7 +26,7 @@ class Tasks(models.Model):
         ('high', 'High'),
     ]
 
-    task_proj = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='tasks')
+    task_proj = models.ForeignKey(Project, to_field='proj_name', on_delete=models.CASCADE, related_name='tasks')
     task_name = models.CharField(max_length=255, verbose_name="Задача")
     task_desc = models.TextField(blank=True, verbose_name="Описание проекта")
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', verbose_name="Статус задачи")
