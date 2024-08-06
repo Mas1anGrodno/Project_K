@@ -30,14 +30,14 @@ class Project(models.Model):
 class Tasks(models.Model):
     
     STATUS_CHOICES = [
-        ('pending', 'Ожидает'),
-        ('in_progress', 'В процессе'),
-        ('completed', 'Готово'),
+        ('Ожидает', 'Ожидает'),
+        ('В процесс', 'В процессе'),
+        ('Готово', 'Готово'),
     ]
     PRIORITY_CHOICES = [
-        ('low', 'Низкий'),
-        ('medium', 'Средний'),
-        ('high', 'Высокий'),
+        ('Низкий', 'Низкий'),
+        ('Средний', 'Средний'),
+        ('Высокий', 'Высокий'),
     ]
 
     task_proj = models.ForeignKey(Project, to_field='proj_name', on_delete=models.CASCADE, related_name='tasks', verbose_name="Проект")
@@ -53,7 +53,8 @@ class Tasks(models.Model):
         verbose_name_plural = "Задачи"
         ordering = ["-task_end"]
 
-
+    def __str__(self):
+      return self.task_name
 
 # Don't forget 
 # python manage.py makemigrations

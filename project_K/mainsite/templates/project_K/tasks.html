@@ -1,5 +1,5 @@
 {% extends 'project_K/base.html' %} {% block content %} {%for a in tasks %}
-<b>Название: {{ a.task_name }}</b>
+<b>Название:<a href="/viewtask/{{a.id}}">{{ a.task_name }}</a></b>
 <p>Описание: {{ a.task_desc }}</p>
 <div align="left">К проекту: {{ a.task_proj }}</div>
 <div align="left">Приоритет: {{ a.priority }}</div>

@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from mainsite.models import *
 from .forms import AddProject
 from .forms import AddTask
+from .forms import TaskForm
 # Create your views here.
 
 def home(request):
@@ -54,6 +55,33 @@ def tasks(request):
         }
     return render(request, 'project_K/tasks.html',context)
 
+def view_task(request, task_id):
+    menu = [{'title':'Главная','url':'/'}, 
+            {'title':'Проекты','url':'/proj'}, 
+            {'title':'Задачи','url':'/tasks'}, 
+            {'title':'Добавить задачу','url':'/add_task'}]
+    
+    instance = get_object_or_404(Tasks, id=task_id)
+    form = TaskForm(instance=instance)
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=instance)
+        if form.is_valid():
+            try:
+                form.save()
+                return HttpResponseRedirect('/tasks')
+            except:
+                form.add_error(None, 'Ошибка при редактировании задачи')
+
+    context = {
+        'title': 'Просмотр задачи',
+        'menu': menu,
+        'form': form,
+        'footer' : "(c) Максим-Ка - Email: example@example.com",
+        'header' : "Просмотр задачи"
+    }
+    return render(request, 'project_K/viewtask.html', context)
+
+
 def add_proj(request):
     menu = [{'title':'Главная','url':'/'}, 
             {'title':'Проекты','url':'/proj'}, 
@@ -103,5 +131,4 @@ def add_task(request):
         'header' : "Добавление задачи"
     }
     return render(request, 'project_K/add_task.html', context)
-
 
