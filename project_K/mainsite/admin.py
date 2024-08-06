@@ -13,4 +13,9 @@ class TasksAdmin(admin.ModelAdmin):
 
 admin.site.register(Tasks,TasksAdmin)
 
+class UsersAdmin(admin.ModelAdmin):
+    list_display = ("id","username", "email", "date_joined")
+
+admin.site.register(Users,UsersAdmin)
+
 # TEvCKYp9thef.97
