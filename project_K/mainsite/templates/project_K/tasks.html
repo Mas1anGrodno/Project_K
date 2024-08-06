@@ -1,8 +1,10 @@
 {% extends 'project_K/base.html' %} {% block content %} {%for a in tasks %}
-<b>{{ a.task_name }}</b>
-<b>{{ a.task_desc }}</b>
-<div align="left">{{ a.task_proj }}</div>
-<div align="left">{{ a.priority }}</div>
+<b>Название: {{ a.task_name }}</b>
+<p>Описание: {{ a.task_desc }}</p>
+<div align="left">К проекту: {{ a.task_proj }}</div>
+<div align="left">Приоритет: {{ a.priority }}</div>
+<div align="left">Исполнитель: {{ a.implementer }}</div>
+<div align="right">Выполнить до : {{ a.task_end }}</div>
 
 <hr />
 {% endfor %} {% endblock %}

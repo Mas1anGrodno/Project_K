@@ -1,7 +1,7 @@
 {% extends 'project_K/base.html' %} {% block content %} {%for a in projects %}
-<b>{{ a.proj_name }}</b>
-<p>{{ a.proj_desc }}</p>
-<div align="left">{{ a.proj_create }}</div>
+<b>Название: {{ a.proj_name }}</b>
+<p>Описание: {{ a.proj_desc }}</p>
+<div align="left">Дата создания: {{ a.proj_create }}</div>
 
 <hr />
 {% endfor %} {% endblock %}
