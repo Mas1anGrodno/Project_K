@@ -1,0 +1,59 @@
+body {
+    background-color: #edf4fc;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li a:hover:not(.active) {
+    background-color: #5d95e3;
+  }
+
+  .active {
+    background-color: #207fb3;
+  }
+
+  nav {
+    display: block;
+  }
+  h3 {
+    position: absolute;
+    margin-right: 1rem;
+    bottom: 0px;
+  }
+  /* Стили для футера */
+  .footer {
+    background-color: #207fb3;
+    color: #fff;
+    padding: 5px;
+    text-align: left;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .footer .container {
+    max-width: 100%%;
+    margin: 0 auto;
+  }
+
+  .footer h2 {
+    margin-top: 0;
+    font-size: 0.6em;
+  }
