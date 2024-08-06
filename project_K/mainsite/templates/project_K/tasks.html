@@ -1,7 +1,5 @@
-{% extends 'project_K/base.html' %} {% block content %}
-<h1>Все Задачи</h1>
-{%for a in tasks %}
-<h2>{{ a.task_name }}</h2>
+{% extends 'project_K/base.html' %} {% block content %} {%for a in tasks %}
+<b>{{ a.task_name }}</b>
 <b>{{ a.task_desc }}</b>
 <div align="left">{{ a.task_proj }}</div>
 <div align="left">{{ a.priority }}</div>

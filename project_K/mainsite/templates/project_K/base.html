@@ -16,9 +16,13 @@
         {% endfor %}
       </ul>
     </nav>
+    <h1>{{header}}</h1>
     {% endblock %}
 
-    <div align="center">{% block content %} {% endblock %}</div>
+    <div class="full-width-div" align="center">
+      {% block content %} {% endblock %}
+    </div>
+
     <h3 align="center">
       {% block footer %}
       <footer class="footer">

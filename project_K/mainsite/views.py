@@ -14,7 +14,8 @@ def home(request):
     context = {
         'title': 'Главная страница',
         'menu': menu,
-        'footer' : "(c) Максим-Ка - Email: example@example.com"
+        'footer' : "(c) Максим-Ка - Email: example@example.com",
+        'header' : "Главная страница"
         }
 
     return render(request, 'project_K/home.html',context)
@@ -30,7 +31,8 @@ def proj(request):
         'title': 'Все проекты',
         'menu': menu,
         'projects': projects,
-        'footer' : "(c) Максим-Ка - Email: example@example.com"
+        'footer' : "(c) Максим-Ка - Email: example@example.com",
+        'header': "Все Проекты"
         }
     
 
@@ -47,7 +49,8 @@ def tasks(request):
         'title': 'Все задачи',
         'menu': menu,
         'tasks': tasks,
-        'footer' : "(c) Максим-Ка - Email: example@example.com"
+        'footer' : "(c) Максим-Ка - Email: example@example.com",
+        'header' : "Все Задачи"
         }
     return render(request, 'project_K/tasks.html',context)
 
@@ -71,7 +74,8 @@ def add_proj(request):
         'title': 'Добавление проекта',
         'menu': menu,
         'form': form,
-        'footer' : "(c) Максим-Ка - Email: example@example.com"
+        'footer' : "(c) Максим-Ка - Email: example@example.com",
+        'header' : "Добавление проекта"
     }
     return render(request, 'project_K/add_proj.html', context)
 
@@ -95,7 +99,8 @@ def add_task(request):
         'title': 'Добавление задачи',
         'menu': menu,
         'form': form,
-        'footer' : "(c) Максим-Ка - Email: example@example.com"
+        'footer' : "(c) Максим-Ка - Email: example@example.com",
+        'header' : "Добавление задачи"
     }
     return render(request, 'project_K/add_task.html', context)
 
