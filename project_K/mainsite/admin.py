@@ -18,4 +18,7 @@ class UsersAdmin(admin.ModelAdmin):
 
 admin.site.register(Users,UsersAdmin)
 
-# TEvCKYp9thef.97
+class CommentsAdmin(admin.ModelAdmin):
+    list_display = ("id","comment", "comment_user", "comment_task")
+
+admin.site.register(Comments,CommentsAdmin)
