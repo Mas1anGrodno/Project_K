@@ -2,9 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from mainsite.models import *
-from .forms import AddProject
-from .forms import AddTask
-from .forms import TaskForm
+from .forms import *
+
 # Create your views here.
 
 def home(request):
@@ -81,7 +80,19 @@ def view_task(request, task_id):
     }
     return render(request, 'project_K/viewtask.html', context)
 
-
+"""def view_coment(request, task_id):
+    instance = get_object_or_404(Comments, id=task_id)
+    form = ComentsForm(instance=instance)
+    if request.method == 'POST':
+        form = ComentsForm(request.POST, instance=instance)
+        if form.is_valid():
+            try:
+                form.save()
+                return HttpResponseRedirect('/tasks')
+            except:
+                form.add_error(None, 'Ошибка при редактировании задачи')
+    return render(request, 'project_K/viewtask.html',{'form': form})
+"""
 def add_proj(request):
     menu = [{'title':'Главная','url':'/'}, 
             {'title':'Проекты','url':'/proj'}, 

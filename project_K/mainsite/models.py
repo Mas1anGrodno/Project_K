@@ -31,7 +31,7 @@ class Tasks(models.Model):
     
     STATUS_CHOICES = [
         ('Ожидает', 'Ожидает'),
-        ('В процесс', 'В процессе'),
+        ('В процессе', 'В процессе'),
         ('Готово', 'Готово'),
     ]
     PRIORITY_CHOICES = [
@@ -60,7 +60,7 @@ class Comments(models.Model):
     comment_user = models.ForeignKey(Users, to_field='id',on_delete=models.CASCADE, related_name='user_coment', verbose_name="Коментарий пользователя" )
     comment_task = models.ForeignKey(Tasks, to_field='id',on_delete=models.CASCADE, related_name='task_coment', verbose_name="Коментарий задачи" )
     comment = models.TextField(blank=True, verbose_name="Коментарий")
-    comment_create = models.DateTimeField(null = True, verbose_name="Дата создания коментария")
+    comment_create = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания коментария")
     class Meta:
         verbose_name = "Коментарии"
         verbose_name_plural = "Коментарии"
