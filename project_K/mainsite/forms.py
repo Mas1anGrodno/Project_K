@@ -31,5 +31,14 @@ class TaskForm(forms.ModelForm):
         model = Tasks
         fields = ['task_name','task_desc','task_proj','task_end','implementer','status','priority']
         # fields = '__all__'
+<<<<<<< HEAD
+=======
+
+class ComentsForm(forms.ModelForm):
+
+    class Meta:
+        model = Comments
+        fields = ['comment','comment_task','comment_user']
+>>>>>>> parent of 2486855 (coments base functionality is working)
 
     
