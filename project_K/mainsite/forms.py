@@ -30,13 +30,11 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Tasks
         fields = ['task_name','task_desc','task_proj','task_end','implementer','status','priority']
-        # fields = '__all__'
-
+        
 class ComentsForm(forms.ModelForm):
-
     class Meta:
         model = Comments
-        fields = ['comment','comment_task','comment_user']
+        fields = ['comment','comment_task','comment_name']
 
         widgets = {
             'comment': forms.Textarea(attrs={'cols': 60, 'rows': 10}),

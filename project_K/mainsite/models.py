@@ -57,7 +57,7 @@ class Tasks(models.Model):
       return self.task_name
 
 class Comments(models.Model):
-    comment_user = models.ForeignKey(Users, to_field='id',on_delete=models.CASCADE, related_name='user_coment', verbose_name="Коментарий пользователя" )
+    comment_name = models.ForeignKey(Users, to_field='username',null = True ,on_delete=models.CASCADE, related_name='user_coment', verbose_name="Коментарий пользователя" )
     comment_task = models.ForeignKey(Tasks, to_field='id',on_delete=models.CASCADE, related_name='task_coment', verbose_name="Коментарий задачи" )
     comment = models.TextField(blank=True, verbose_name="Коментарий")
     comment_create = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания коментария")
@@ -66,6 +66,7 @@ class Comments(models.Model):
         verbose_name_plural = "Коментарии"
         ordering = ["-comment_create"]
 
+    
 # Don't forget 1
 # python manage.py makemigrations
 # python manage.py migrate
