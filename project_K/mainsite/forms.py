@@ -30,6 +30,7 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Tasks
         fields = ['task_name','task_desc','task_proj','task_end','implementer','status','priority']
+<<<<<<< HEAD
         # fields = '__all__'
 <<<<<<< HEAD
 =======
@@ -40,5 +41,14 @@ class ComentsForm(forms.ModelForm):
         model = Comments
         fields = ['comment','comment_task','comment_user']
 >>>>>>> parent of 2486855 (coments base functionality is working)
+=======
+        
+class ComentsForm(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = ['comment','comment_task','comment_name']
+>>>>>>> edbaff368d65db28f4fc6d920a810484d921ab25
 
-    
+        widgets = {
+            'comment': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
+        }

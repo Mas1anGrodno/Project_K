@@ -2,16 +2,16 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from mainsite.models import *
-from .forms import AddProject
-from .forms import AddTask
-from .forms import TaskForm
+from .forms import *
+
 # Create your views here.
 
 def home(request):
     menu = [{'title':'Главная','url':'/'}, 
             {'title':'Проекты','url':'/proj'}, 
             {'title':'Задачи','url':'/tasks'}, 
-            {'title':'Войти','url':'/admin'}]
+            {'title':'Войти','url':'/admin'},
+            {'title':'Добавить коментарий','url':'/add_coment'}]
     context = {
         'title': 'Главная страница',
         'menu': menu,
@@ -25,7 +25,8 @@ def proj(request):
     menu = [{'title':'Главная','url':'/'}, 
             {'title':'Проекты','url':'/proj'}, 
             {'title':'Задачи','url':'/tasks'}, 
-            {'title':'Добавить проект','url':'/add_proj'}]
+            {'title':'Добавить проект','url':'/add_proj'},
+            {'title':'Добавить коментарий','url':'/add_coment'}]
     projects = Project.objects.all()
     
     context = {
@@ -35,15 +36,59 @@ def proj(request):
         'footer' : "(c) Максим-Ка - Email: example@example.com",
         'header': "Все Проекты"
         }
-    
-
     return render(request, 'project_K/proj.html',context)
+
+
+def coments(request, coment_id):
+    menu = [{'title':'Главная','url':'/'}, 
+            {'title':'Проекты','url':'/proj'}, 
+            {'title':'Задачи','url':'/tasks'}, 
+            {'title':'Добавить задачу','url':'/add_task'},
+            {'title':'Добавить коментарий','url':'/add_coment'}]
+    
+    all_coments = Comments.objects.filter(comment_task_id=coment_id)
+    context = {
+        'title': 'Просмотр Коментариев',
+        'menu': menu,
+        'all_coments': all_coments,
+        'footer' : "(c) Максим-Ка - Email: example@example.com",
+        'header' : "Просмотр Коментариев"
+    }
+
+    return render(request, 'project_K/coments.html', context)
+
+def add_coment(request):
+    menu = [{'title':'Главная','url':'/'}, 
+            {'title':'Проекты','url':'/proj'}, 
+            {'title':'Задачи','url':'/tasks'}]
+           
+    
+    if request.method == 'POST':
+        form = ComentsForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return HttpResponseRedirect('/tasks')
+            except:
+                form.add_error(None, 'Ошибка при добавлении проекта')
+    else:
+        form = ComentsForm()
+    
+    context = {
+        'title': 'Добавление Коментария',
+        'menu': menu,
+        'form': form,
+        'footer' : "(c) Максим-Ка - Email: example@example.com",
+        'header' : "Добавление Коментария"
+    }
+    return render(request, 'project_K/add_coment.html', context)
 
 def tasks(request):
     menu = [{'title':'Главная','url':'/'}, 
             {'title':'Проекты','url':'/proj'}, 
             {'title':'Задачи','url':'/tasks'}, 
-            {'title':'Добавить задачу','url':'/add_task'}]
+            {'title':'Добавить задачу','url':'/add_task'},
+            {'title':'Добавить коментарий','url':'/add_coment'}]
     tasks = Tasks.objects.all()
 
     context = {
@@ -59,7 +104,8 @@ def view_task(request, task_id):
     menu = [{'title':'Главная','url':'/'}, 
             {'title':'Проекты','url':'/proj'}, 
             {'title':'Задачи','url':'/tasks'}, 
-            {'title':'Добавить задачу','url':'/add_task'}]
+            {'title':'Добавить задачу','url':'/add_task'},
+            {'title':'Добавить коментарий','url':'/add_coment'}]
     
     instance = get_object_or_404(Tasks, id=task_id)
     form = TaskForm(instance=instance)
@@ -98,6 +144,7 @@ def add_proj(request):
     menu = [{'title':'Главная','url':'/'}, 
             {'title':'Проекты','url':'/proj'}, 
             {'title':'Задачи','url':'/tasks'}]
+           
     
     if request.method == 'POST':
         form = AddProject(request.POST)
@@ -123,6 +170,7 @@ def add_task(request):
     menu = [{'title':'Главная','url':'/'}, 
             {'title':'Проекты','url':'/proj'}, 
             {'title':'Задачи','url':'/tasks'}]
+            
     
     if request.method == 'POST':
         form = AddTask(request.POST)
