@@ -34,8 +34,7 @@ class TaskForm(forms.ModelForm):
 class ComentsForm(forms.ModelForm):
     class Meta:
         model = Comments
-        fields = ['comment','comment_task','comment_name']
-
+        fields = ['comment','comment_task']
 
         widgets = {
             'comment': forms.Textarea(attrs={'cols': 60, 'rows': 10}),

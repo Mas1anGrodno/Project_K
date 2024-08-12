@@ -67,14 +67,15 @@ def add_coment(request):
     if request.method == 'POST':
         form = ComentsForm(request.POST)
         if form.is_valid():
-            try:
-                form.save()
-                return HttpResponseRedirect('/')
-            except:
-                form.add_error(None, 'Ошибка при добавлении проекта')
+            comment = form.save(commit=False)
+            comment.comment_name = request.user
+            comment.save()
+            return HttpResponseRedirect('/')
+        else:
+            form.add_error(None, 'Ошибка при добавлении комментария')
     else:
         form = ComentsForm()
-    
+
     context = {
         'title': 'Добавление Коментария',
         'menu': menu,
@@ -107,18 +108,20 @@ def view_task(request, task_id):
             {'title':'Проекты','url':'/proj'}, 
             {'title':'Задачи','url':'/tasks'}, 
             {'title':'Добавить задачу','url':'/add_task'},
-            {'title':'Добавить коментарий','url':'/add_coment'}]
+            {'title':'Добавить комментарий','url':'/add_coment'}]
     
     instance = get_object_or_404(Tasks, id=task_id)
-    form = TaskForm(instance=instance)
     if request.method == 'POST':
         form = TaskForm(request.POST, instance=instance)
         if form.is_valid():
-            try:
-                form.save()
-                return HttpResponseRedirect('/tasks')
-            except:
-                form.add_error(None, 'Ошибка при редактировании задачи')
+            task = form.save(commit=False)
+            task.sender = request.user
+            task.save()
+            return HttpResponseRedirect('/tasks')
+        else:
+            form.add_error(None, 'Ошибка при редактировании задачи')
+    else:
+        form = TaskForm(instance=instance)
 
     context = {
         'title': 'Просмотр задачи',
@@ -166,11 +169,12 @@ def add_task(request):
     if request.method == 'POST':
         form = AddTask(request.POST)
         if form.is_valid():
-            try:
-                form.save()
-                return HttpResponseRedirect('/tasks')
-            except:
-                form.add_error(None, 'Ошибка при добавлении задачи')
+            task = form.save(commit=False)
+            task.sender = request.user
+            task.save()
+            return HttpResponseRedirect('/tasks')
+        else:
+            form.add_error(None, 'Ошибка при добавлении задачи')
     else:
         form = AddTask()
     

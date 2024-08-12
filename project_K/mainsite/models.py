@@ -29,7 +29,8 @@ class Tasks(models.Model):
     ]
 
     task_proj = models.ForeignKey(Project, to_field='proj_name', on_delete=models.CASCADE, related_name='tasks', verbose_name="Проект")
-    implementer = models.ForeignKey(get_user_model(),on_delete=models.SET_NULL, related_name='task_user', null = True, default=None, verbose_name="Пользователь" )
+    implementer = models.ForeignKey(get_user_model(),on_delete=models.SET_NULL, related_name='task_user', null = True, default=None, verbose_name="Исполнитель" )
+    sender = models.ForeignKey(get_user_model(),on_delete=models.SET_NULL, related_name='task_sender', null = True, default=None, verbose_name="Отправитель" )
     task_name = models.CharField(max_length=255, verbose_name="Задача")
     task_desc = models.TextField(blank=True, verbose_name="Описание задачи")
     task_end = models.DateField(null = True, verbose_name="Выполнить до")
