@@ -8,27 +8,7 @@
   </head>
 
   <body>
-    {% block mainmenu %}
-    <nav>
-      <ul>
-        {% for item in menu %}
-        <li class="mainmenu"><a href="{{ item.url }}">{{ item.title }}</a></li>
-        {% endfor %} {% if user.is_authenticated %}
-        <li class="login"><a href="/users/logout">Выйти</a></li>
-        <li class="login">
-          <a href="/users/login">Вы вошли как: {{user.username}} </a>
-        </li>
-
-        {% else %}
-        <li class="login"><a href="/users/login">Войти</a></li>
-        <li class="login"><a href="#">Зарегестрироваться</a></li>
-
-        {% endif %}
-      </ul>
-    </nav>
-    <h1>{{header}}</h1>
-    {% endblock %}
-
+    {% include "project_K/menu.html" %}
     <div class="full-width-div" align="center">
       {% block content %} {% endblock %}
     </div>
