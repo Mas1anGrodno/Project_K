@@ -1,3 +1,4 @@
+
 body, html  {
     background-color: #edf4fc;
     margin: 0;
@@ -13,11 +14,13 @@ body, html  {
     background-color: #333;
   }
 
-  li {
-    float: left;
+
+
+  li.login { 
+    float: right;
   }
 
-  li a {
+  li.login a {
     display: block;
     color: white;
     font-family: Arial, sans-serif;
@@ -26,7 +29,23 @@ body, html  {
     text-decoration: none;
   }
 
-  li a:hover:not(.active) {
+  li.login a:hover:not(.active) {
+    background-color: #5d95e3;
+  }
+
+  li.mainmenu {
+    float: left;
+  }
+  li.mainmenu a {
+    display: block;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li.mainmenu a:hover:not(.active) {
     background-color: #5d95e3;
   }
 
