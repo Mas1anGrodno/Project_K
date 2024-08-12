@@ -10,7 +10,7 @@ def home(request):
     menu = [{'title':'Главная','url':'/'}, 
             {'title':'Проекты','url':'/proj'}, 
             {'title':'Задачи','url':'/tasks'}, 
-            {'title':'Войти','url':'/admin'},
+            {'title':'Войти','url':'/users/login'},
             {'title':'Добавить коментарий','url':'/add_coment'}]
     context = {
         'title': 'Главная страница',
@@ -68,7 +68,7 @@ def add_coment(request):
         if form.is_valid():
             try:
                 form.save()
-                return HttpResponseRedirect('/tasks')
+                return HttpResponseRedirect('/')
             except:
                 form.add_error(None, 'Ошибка при добавлении проекта')
     else:
