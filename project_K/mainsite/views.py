@@ -10,7 +10,6 @@ def home(request):
     menu = [{'title':'Главная','url':'/'}, 
             {'title':'Проекты','url':'/proj'}, 
             {'title':'Задачи','url':'/tasks'}, 
-            {'title':'Войти','url':'/users/login'},
             {'title':'Добавить коментарий','url':'/add_coment'}]
     context = {
         'title': 'Главная страница',
