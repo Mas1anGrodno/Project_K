@@ -13,12 +13,13 @@ class TasksAdmin(admin.ModelAdmin):
 
 admin.site.register(Tasks,TasksAdmin)
 
-class UsersAdmin(admin.ModelAdmin):
-    list_display = ("id","username", "email", "date_joined")
+# class UsersAdmin(admin.ModelAdmin):
+#      list_display = ("id","username", "email", "date_joined")
 
-admin.site.register(Users,UsersAdmin)
+# admin.site.register(User,UsersAdmin)
 
 class CommentsAdmin(admin.ModelAdmin):
-    list_display = ("id","comment", "comment_name", "comment_task")
+    list_display = ("id","comment", "comment_task")
+    #list_display = ("id","comment", "comment_name", "comment_task")
 
 admin.site.register(Comments,CommentsAdmin)

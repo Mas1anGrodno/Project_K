@@ -1,5 +1,7 @@
 {% extends 'project_K/base.html' %} {% block content %} {%for a in all_coments%}
+{% comment %}
 <p>{{ a.comment_name }} - {{ a.comment }}</p>
-
+{% endcomment %}
+<p>- {{ a.comment }}</p>
 <hr />
 {% endfor %} {% endblock %}
