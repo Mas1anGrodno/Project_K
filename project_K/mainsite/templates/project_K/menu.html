@@ -1,18 +1,25 @@
-<nav>
+<nav class="navbar">
   <ul>
-    {% for item in menu %}
+    {% for item in menu %} {% if item.submenu %}
+    <li class="mainmenu dropdown">
+      <a href="{{ item.url }}">{{ item.title }}</a>
+      <ul class="dropdown-menu">
+        {% for subitem in item.submenu %}
+        <li><a href="{{ subitem.url }}">{{ subitem.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% else %}
     <li class="mainmenu"><a href="{{ item.url }}">{{ item.title }}</a></li>
-    {% endfor %} {% if user.is_authenticated %}
+    {% endif %} {% endfor %} {% if user.is_authenticated %}
     <li class="login"><a href="/users/logout">Выйти</a></li>
     <li class="login">
-      <a href="/users/login">Вы вошли как: {{user.username}} </a>
+      <a href="/users/login">Вы вошли как: {{ user.username }}</a>
     </li>
-
     {% else %}
     <li class="login"><a href="/users/login">Войти</a></li>
-    <li class="login"><a href="#">Зарегестрироваться</a></li>
-
+    <li class="login"><a href="#">Зарегистрироваться</a></li>
     {% endif %}
   </ul>
 </nav>
-<h1>{{header}}</h1>
+<h1>{{ header }}</h1>
