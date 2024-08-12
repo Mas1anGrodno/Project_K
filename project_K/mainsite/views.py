@@ -8,13 +8,9 @@ from .forms import *
 # Create your views here.
 
 def home(request):
-    menu = [{'title':'Главная','url':'/'}, 
-            {'title':'Проекты','url':'/proj'}, 
-            {'title':'Задачи','url':'/tasks'}, 
-            {'title':'Добавить коментарий','url':'/add_coment'}]
+    
     context = {
         'title': 'Главная страница',
-        'menu': menu,
         'footer' : "(c) Максим-Ка - Email: example@example.com",
         'header' : "Главная страница"
         }
@@ -22,16 +18,10 @@ def home(request):
     return render(request, 'project_K/home.html',context)
 
 def proj(request):
-    menu = [{'title':'Главная','url':'/'}, 
-            {'title':'Проекты','url':'/proj'}, 
-            {'title':'Задачи','url':'/tasks'}, 
-            {'title':'Добавить проект','url':'/add_proj'},
-            {'title':'Добавить коментарий','url':'/add_coment'}]
     projects = Project.objects.all()
     
     context = {
         'title': 'Все проекты',
-        'menu': menu,
         'projects': projects,
         'footer' : "(c) Максим-Ка - Email: example@example.com",
         'header': "Все Проекты"
@@ -40,16 +30,9 @@ def proj(request):
 
 
 def coments(request, coment_id):
-    menu = [{'title':'Главная','url':'/'}, 
-            {'title':'Проекты','url':'/proj'}, 
-            {'title':'Задачи','url':'/tasks'}, 
-            {'title':'Добавить задачу','url':'/add_task'},
-            {'title':'Добавить коментарий','url':'/add_coment'}]
-    
     all_coments = Comments.objects.filter(comment_task_id=coment_id)
     context = {
         'title': 'Просмотр Коментариев',
-        'menu': menu,
         'all_coments': all_coments,
         'footer' : "(c) Максим-Ка - Email: example@example.com",
         'header' : "Просмотр Коментариев"
@@ -59,11 +42,6 @@ def coments(request, coment_id):
 
 @login_required
 def add_coment(request):
-    menu = [{'title':'Главная','url':'/'}, 
-            {'title':'Проекты','url':'/proj'}, 
-            {'title':'Задачи','url':'/tasks'}]
-           
-    
     if request.method == 'POST':
         form = ComentsForm(request.POST)
         if form.is_valid():
@@ -78,7 +56,6 @@ def add_coment(request):
 
     context = {
         'title': 'Добавление Коментария',
-        'menu': menu,
         'form': form,
         'footer' : "(c) Максим-Ка - Email: example@example.com",
         'header' : "Добавление Коментария"
@@ -86,16 +63,10 @@ def add_coment(request):
     return render(request, 'project_K/add_coment.html', context)
 
 def tasks(request):
-    menu = [{'title':'Главная','url':'/'}, 
-            {'title':'Проекты','url':'/proj'}, 
-            {'title':'Задачи','url':'/tasks'}, 
-            {'title':'Добавить задачу','url':'/add_task'},
-            {'title':'Добавить коментарий','url':'/add_coment'}]
     tasks = Tasks.objects.all()
 
     context = {
         'title': 'Все задачи',
-        'menu': menu,
         'tasks': tasks,
         'footer' : "(c) Максим-Ка - Email: example@example.com",
         'header' : "Все Задачи"
@@ -104,12 +75,6 @@ def tasks(request):
 
 @login_required
 def view_task(request, task_id):
-    menu = [{'title':'Главная','url':'/'}, 
-            {'title':'Проекты','url':'/proj'}, 
-            {'title':'Задачи','url':'/tasks'}, 
-            {'title':'Добавить задачу','url':'/add_task'},
-            {'title':'Добавить комментарий','url':'/add_coment'}]
-    
     instance = get_object_or_404(Tasks, id=task_id)
     if request.method == 'POST':
         form = TaskForm(request.POST, instance=instance)
@@ -125,7 +90,6 @@ def view_task(request, task_id):
 
     context = {
         'title': 'Просмотр задачи',
-        'menu': menu,
         'form': form,
         'footer' : "(c) Максим-Ка - Email: example@example.com",
         'header' : "Просмотр задачи"
@@ -134,11 +98,7 @@ def view_task(request, task_id):
 
 @login_required
 def add_proj(request):
-    menu = [{'title':'Главная','url':'/'}, 
-            {'title':'Проекты','url':'/proj'}, 
-            {'title':'Задачи','url':'/tasks'}]
-           
-    
+
     if request.method == 'POST':
         form = AddProject(request.POST)
         if form.is_valid():
@@ -152,7 +112,6 @@ def add_proj(request):
     
     context = {
         'title': 'Добавление проекта',
-        'menu': menu,
         'form': form,
         'footer' : "(c) Максим-Ка - Email: example@example.com",
         'header' : "Добавление проекта"
@@ -160,12 +119,7 @@ def add_proj(request):
     return render(request, 'project_K/add_proj.html', context)
 
 @login_required
-def add_task(request):
-    menu = [{'title':'Главная','url':'/'}, 
-            {'title':'Проекты','url':'/proj'}, 
-            {'title':'Задачи','url':'/tasks'}]
-            
-    
+def add_task(request):    
     if request.method == 'POST':
         form = AddTask(request.POST)
         if form.is_valid():
@@ -180,7 +134,6 @@ def add_task(request):
     
     context = {
         'title': 'Добавление задачи',
-        'menu': menu,
         'form': form,
         'footer' : "(c) Максим-Ка - Email: example@example.com",
         'header' : "Добавление задачи"
