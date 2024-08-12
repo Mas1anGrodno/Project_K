@@ -1,32 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
-
+from django.contrib.auth import get_user_model
 # Create your models here.
-# Новый класс стандартного пользователя джанги
-# class User(models.Model):
-#     username = models.CharField(max_length=255,unique=True, verbose_name="Имя Пользователя")
-#     email = models.EmailField(max_length = 255, verbose_name="Электронная почта")
-#     password = models.CharField(max_length=255, verbose_name="Пароль")
-#     date_joined = models.DateTimeField(auto_now_add=True)
-#     class Meta:
-#         verbose_name = "Пользователь"
-#         verbose_name_plural = "Пользователь"
-#         ordering = ["-date_joined"]
-#     def __str__(self):
-#       return self.username
-    
-    # Старый класс Узер надо удалить 
-# class Users(models.Model):
-#     username = models.CharField(max_length=255,unique=True, verbose_name="Имя Пользователя")
-#     email = models.EmailField(max_length = 255, verbose_name="Электронная почта")
-#     password = models.CharField(max_length=255, verbose_name="Пароль")
-#     date_joined = models.DateTimeField(auto_now_add=True)
-#     class Meta:
-#         verbose_name = "Пользователь"
-#         verbose_name_plural = "Пользователь"
-#         ordering = ["-date_joined"]
-#     def __str__(self):
-#       return self.username
     
 class Project(models.Model):
     proj_name = models.CharField(max_length=255, unique=True, verbose_name="Название проекта")
@@ -55,7 +29,7 @@ class Tasks(models.Model):
     ]
 
     task_proj = models.ForeignKey(Project, to_field='proj_name', on_delete=models.CASCADE, related_name='tasks', verbose_name="Проект")
-    #implementer = models.ForeignKey(User, to_field='username',null = True ,on_delete=models.CASCADE, related_name='user_task', verbose_name="Пользователь" )
+    implementer = models.ForeignKey(get_user_model(),on_delete=models.SET_NULL, related_name='task_user', null = True, default=None, verbose_name="Пользователь" )
     task_name = models.CharField(max_length=255, verbose_name="Задача")
     task_desc = models.TextField(blank=True, verbose_name="Описание задачи")
     task_end = models.DateField(null = True, verbose_name="Выполнить до")
@@ -71,7 +45,7 @@ class Tasks(models.Model):
       return self.task_name
 
 class Comments(models.Model):
-    #comment_name = models.ForeignKey(User, to_field='username',null = True ,on_delete=models.CASCADE, related_name='user_coment', verbose_name="Коментарий пользователя" )
+    comment_name = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='user_coment',null=True, default=None, verbose_name="Коментарий пользователя" )
     comment_task = models.ForeignKey(Tasks, to_field='id',on_delete=models.CASCADE, related_name='task_coment', verbose_name="Коментарий задачи" )
     comment = models.TextField(blank=True, verbose_name="Коментарий")
     comment_create = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания коментария")

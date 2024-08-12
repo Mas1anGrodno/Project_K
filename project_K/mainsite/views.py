@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from mainsite.models import *
 from .forms import *
 
@@ -56,6 +57,7 @@ def coments(request, coment_id):
 
     return render(request, 'project_K/coments.html', context)
 
+@login_required
 def add_coment(request):
     menu = [{'title':'Главная','url':'/'}, 
             {'title':'Проекты','url':'/proj'}, 
@@ -99,6 +101,7 @@ def tasks(request):
         }
     return render(request, 'project_K/tasks.html',context)
 
+@login_required
 def view_task(request, task_id):
     menu = [{'title':'Главная','url':'/'}, 
             {'title':'Проекты','url':'/proj'}, 
@@ -126,19 +129,7 @@ def view_task(request, task_id):
     }
     return render(request, 'project_K/viewtask.html', context)
 
-"""def view_coment(request, task_id):
-    instance = get_object_or_404(Comments, id=task_id)
-    form = ComentsForm(instance=instance)
-    if request.method == 'POST':
-        form = ComentsForm(request.POST, instance=instance)
-        if form.is_valid():
-            try:
-                form.save()
-                return HttpResponseRedirect('/tasks')
-            except:
-                form.add_error(None, 'Ошибка при редактировании задачи')
-    return render(request, 'project_K/viewtask.html',{'form': form})
-"""
+@login_required
 def add_proj(request):
     menu = [{'title':'Главная','url':'/'}, 
             {'title':'Проекты','url':'/proj'}, 
@@ -165,6 +156,7 @@ def add_proj(request):
     }
     return render(request, 'project_K/add_proj.html', context)
 
+@login_required
 def add_task(request):
     menu = [{'title':'Главная','url':'/'}, 
             {'title':'Проекты','url':'/proj'}, 
