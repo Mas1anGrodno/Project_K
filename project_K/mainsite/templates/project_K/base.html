@@ -13,8 +13,16 @@
       <ul>
         {% for item in menu %}
         <li class="mainmenu"><a href="{{ item.url }}">{{ item.title }}</a></li>
-        {% endfor %}
+        {% endfor %} {% if user.is_authenticated %}
+        <li class="login"><a href="/users/logout">Выйти</a></li>
+        <li class="login">
+          <a href="/users/login">Вы вошли как: {{user.username}} </a>
+        </li>
+
+        {% else %}
         <li class="login"><a href="/users/login">Войти</a></li>
+
+        {% endif %}
       </ul>
     </nav>
     <h1>{{header}}</h1>
