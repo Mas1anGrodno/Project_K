@@ -5,6 +5,15 @@ volumes:
 
 services:
 
+  postgres:
+    image: postgres:alpine
+    container_name: postgres
+    restart: always
+    env_file:
+      - docker/env/.env.dev
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
   django:
     build:
       context: .
@@ -47,11 +56,3 @@ services:
     depends_on:
       - django
 
-  postgres:
-    image: postgres:alpine
-    container_name: postgres
-    restart: always
-    env_file:
-      - docker/env/.env.dev
-    volumes:
-      - pgdata:/var/lib/postgresql/data/
