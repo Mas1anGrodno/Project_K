@@ -3,11 +3,8 @@ from .views import UserViewSet
 from rest_framework.routers import DefaultRouter
 from .views import *
 
-router = DefaultRouter()
-router.register(r'users', UserViewSet, basename='user')
 
 urlpatterns = [
-    path('api/v1/users', include(router.urls)),
     path("", home,name='home'),
     path("proj/", proj,name='proj'),
     path("add_proj/", add_proj, name='add_proj'),
@@ -19,4 +16,5 @@ urlpatterns = [
     path('api/v1/tasklist/', TasksAPIView.as_view()),
     path('api/v1/tasks/', TaskListCreateView.as_view(), name='task-list-create'),
     path('api/v1/tasks/<int:pk>/', TaskDetailView.as_view(), name='task-detail'),
+    path('api/v1/users', UserViewSet.as_view(),name='all_users')
 ]
