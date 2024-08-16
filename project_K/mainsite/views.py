@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from rest_framework import generics
 from rest_framework import serializers
 from rest_framework import viewsets
-from .serializers import *
+from .serializers import UserSerializer, AllTaskSerializer, TaskSerializer
 from mainsite.models import *
 from .forms import *
 
