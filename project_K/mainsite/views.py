@@ -143,6 +143,11 @@ def add_task(request):
     }
     return render(request, 'project_K/add_task.html', context)
 
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializer
+    
 class TasksAPIView(generics.ListAPIView):
     queryset = Tasks.objects.all()
     serializer_class = AllTaskSerializer
