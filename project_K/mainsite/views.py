@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from rest_framework import generics
+from .serializers import TaskSerializer
 from mainsite.models import *
 from .forms import *
 
@@ -140,3 +142,6 @@ def add_task(request):
     }
     return render(request, 'project_K/add_task.html', context)
 
+class TasksAPIView(generics.ListAPIView):
+    queryset = Tasks.objects.all()
+    serializer = TaskSerializer
