@@ -159,7 +159,7 @@ def task_list(request):
     return Response(serializer.data)
 
 
-class TaskListCreateView(generics.ListCreateAPIView):
+class TaskListCreateView(LanguageMixin, generics.ListCreateAPIView):
     queryset = Tasks.objects.all()
     serializer_class = TaskSerializer
 
