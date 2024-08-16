@@ -148,7 +148,7 @@ class TasksAPIView(generics.ListAPIView):
     serializer_class = AllTaskSerializer
 
 
-class ProjComplexView(serializers.ModelSerializer):
+class ProjComplexView(generics.ListAPIView):
     tasks = TasksSerializer(many=True, read_only=True)
     comments = CommentsSerializer(many=True, read_only=True)
 
