@@ -10,6 +10,7 @@ from rest_framework import viewsets
 from .serializers import UserSerializer, AllTaskSerializer, TaskSerializer
 from mainsite.models import *
 from .forms import *
+from .mixins import *
 
 # Create your views here.
 
@@ -147,7 +148,7 @@ def add_task(request):
     return render(request, 'project_K/add_task.html', context)
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(LanguageMixin, viewsets.ModelViewSet):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
 
