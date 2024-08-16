@@ -15,8 +15,8 @@ class AllTaskSerializer(serializers.ModelSerializer):
         fields = ['task_proj','implementer','implementer','task_name','status','priority' ]
 
 class TaskSerializer(serializers.ModelSerializer):
-    task_proj = serializers.CharField(source='task_proj.proj_name')
-    implementer = serializers.CharField(source='implementer.username')
+    task_proj = serializers.CharField(source='task_proj.proj_name',read_only=False)
+    implementer = serializers.CharField(source='implementer.username',read_only=False)
     comments = serializers.SerializerMethodField()
 
     class Meta:
