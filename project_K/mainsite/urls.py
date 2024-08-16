@@ -15,7 +15,7 @@ urlpatterns = [
     path("add_coment/", add_coment, name='add_coment'),
     path('viewtask/<int:task_id>/', view_task, name='view_task'),
     path('coments/<int:coment_id>/', coments, name='view_coments'),
-    path('api/v1/tasklist/', TasksAPIView.as_view()),
-    path('api/v1/tasks/', TaskListCreateView.as_view(), name='task-list-create'),
+    path('api/v1/tasklist/', task_list, name='task-list'),
+    path('api/v1/tasks/', TaskListCreateView.as_view(), name='task-list'),
     path('api/v1/tasks/<int:pk>/', TaskDetailView.as_view(), name='task-detail'),
 ]

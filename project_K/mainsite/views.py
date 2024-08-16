@@ -4,6 +4,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from rest_framework import generics
 from rest_framework import serializers
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from rest_framework import viewsets
 from .serializers import UserSerializer, AllTaskSerializer, TaskSerializer
 from mainsite.models import *
@@ -149,9 +151,11 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
 
-class TasksAPIView(generics.ListAPIView):
-    queryset = Tasks.objects.all()
-    serializer_class = AllTaskSerializer
+@api_view(['GET'])
+def task_list(request):
+    tasks = Tasks.objects.all()
+    serializer = AllTaskSerializer(tasks, many=True)
+    return Response(serializer.data)
 
 
 class TaskListCreateView(generics.ListCreateAPIView):
