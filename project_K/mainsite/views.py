@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from rest_framework import generics
 from rest_framework import serializers
+from rest_framework import viewsets
 from .serializers import *
 from mainsite.models import *
 from .forms import *
@@ -147,7 +148,7 @@ def add_task(request):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
-    
+
 class TasksAPIView(generics.ListAPIView):
     queryset = Tasks.objects.all()
     serializer_class = AllTaskSerializer
