@@ -13,5 +13,6 @@ urlpatterns = [
     path('viewtask/<int:task_id>/', view_task, name='view_task'),
     path('coments/<int:coment_id>/', coments, name='view_coments'),
     path('api/v1/tasklist/', TasksAPIView.as_view()),
-    path('api/v1/proj/', ProjComplexView.as_view()),
+    #path('api/v1/proj/', ProjComplexView.as_view()),
+    path('api/v1/proj/<int:project>/', ProjComplexView.as_view(), name='project-detail'),
 ]
