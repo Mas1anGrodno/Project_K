@@ -13,6 +13,6 @@ urlpatterns = [
     path('viewtask/<int:task_id>/', view_task, name='view_task'),
     path('coments/<int:coment_id>/', coments, name='view_coments'),
     path('api/v1/tasklist/', TasksAPIView.as_view()),
-    path('tasks/', TaskListCreateView.as_view(), name='task-list-create'),
-    path('tasks/<int:pk>/', TaskDetailView.as_view(), name='task-detail'),
+    path('api/v1/tasks/', TaskListCreateView.as_view(), name='task-list-create'),
+    path('api/v1/tasks/<int:pk>/', TaskDetailView.as_view(), name='task-detail'),
 ]
