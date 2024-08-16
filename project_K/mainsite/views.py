@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from rest_framework import generics
-from .serializers import TaskSerializer
+from rest_framework import serializers
+from .serializers import AllTaskSerializer, TasksSerializer, CommentsSerializer
 from mainsite.models import *
 from .forms import *
 
@@ -144,4 +145,20 @@ def add_task(request):
 
 class TasksAPIView(generics.ListAPIView):
     queryset = Tasks.objects.all()
-    serializer_class = TaskSerializer
+    serializer_class = AllTaskSerializer
+
+
+class ProjComplexView(serializers.ModelSerializer):
+    tasks = TasksSerializer(many=True, read_only=True)
+    comments = CommentsSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Project
+        fields = ['id', 'proj_name', 'description', 'tasks', 'comments']
+
+    def get_product_details(self, project):
+        try:
+            proj = Project.objects.get(proj_name=project)
+            return self.to_representation(proj)
+        except proj.DoesNotExist:
+            return None
