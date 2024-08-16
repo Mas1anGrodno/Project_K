@@ -9,7 +9,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = get_user_model()
         fields = ['id', 'username', 'email']
 
-@api_view(['GET'])
 class AllTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tasks
