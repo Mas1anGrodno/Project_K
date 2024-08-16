@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from rest_framework import generics
 from rest_framework import serializers
-from .serializers import AllTaskSerializer, TasksSerializer, CommentsSerializer
+from .serializers import *
 from mainsite.models import *
 from .forms import *
 
