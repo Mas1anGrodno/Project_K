@@ -13,8 +13,8 @@ class LanguageMixin:
         translation.deactivate()
         return translated_content
 
-    # def list(self, request, *args, **kwargs):
-    #     response = super().list(request, *args, **kwargs)
-    #     lang = self.get_language(request)
-    #     translated_data = [self.translate_content(item, lang) for item in response.data]
-    #     return Response(translated_data)
+    def list(self, request, *args, **kwargs):
+        response = super().list(request, *args, **kwargs)
+        lang = self.get_language(request)
+        translated_data = [self.translate_content(item, lang) for item in response.data]
+        return Response(translated_data)
