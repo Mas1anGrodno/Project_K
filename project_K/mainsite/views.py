@@ -144,4 +144,4 @@ def add_task(request):
 
 class TasksAPIView(generics.ListAPIView):
     queryset = Tasks.objects.all()
-    serializer = TaskSerializer
+    serializer_class = TaskSerializer
