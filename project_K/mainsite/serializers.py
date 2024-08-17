@@ -21,7 +21,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tasks
-        fields = ['task_proj', 'implementer', 'task_name', 'task_end', 'comments']
+        fields = ['task_proj','task_desc', 'implementer', 'task_name', 'task_end', 'comments']
 
     def get_comments(self, obj):
         comments = Comments.objects.filter(comment_task=obj)
@@ -31,6 +31,7 @@ class TaskSerializer(serializers.ModelSerializer):
         instance.task_proj.proj_name = validated_data.get('task_proj', instance.task_proj.proj_name)
         instance.implementer.username = validated_data.get('implementer', instance.implementer.username)
         instance.task_name = validated_data.get('task_name', instance.task_name)
+        instance.task_desc = validated_data.get('task_desc', instance.task_desc)
         instance.task_end = validated_data.get('task_end', instance.task_end)
         instance.status = validated_data.get('status', instance.status)
         instance.priority = validated_data.get('priority', instance.priority)
