@@ -1,20 +1,44 @@
-from django.utils.translation import gettext as _
+#from googletrans import Translator
+from deep_translator import GoogleTranslator
 from rest_framework.response import Response
 
-class LanguageMixin:
-    def get_language(self, request):
-        return request.query_params.get('lang', 'en')
+class TranslationMixin:
+    def translate_text(self, text, dest_language):
+        translator = GoogleTranslator()
+        translation = translator.translate(text, dest=dest_language)
+        return translation.text
+
+    def translate_response(self, data, dest_language):
+        if isinstance(data, list):
+            return [self.translate_response(item, dest_language) for item in data]
+        elif isinstance(data, dict):
+            return {key: self.translate_text(value, dest_language) if isinstance(value, str) else value for key, value in data.items()}
+        return data
+
+    def finalize_response(self, request, response, *args, **kwargs):
+        response = super().finalize_response(request, response, *args, **kwargs)
+        dest_language = request.query_params.get('lang', 'en')
+        response.data = self.translate_response(response.data, dest_language)
+        return response
 
 
-    def translate_content(self, content, lang):
-        from django.utils import translation
-        translation.activate(lang)
-        translated_content = {key: _(value) if isinstance(value, str) else value for key, value in content.items()}
-        translation.deactivate()
-        return translated_content
+# from django.utils.translation import gettext as _
+# from rest_framework.response import Response
+
+# class LanguageMixin:
+#     def get_language(self, request):
+#         return request.query_params.get('lang', 'en')
+
+
+#     def translate_content(self, content, lang):
+#         from django.utils import translation
+#         translation.activate(lang)
+#         translated_content = {key: _(value) if isinstance(value, str) else value for key, value in content.items()}
+#         translation.deactivate()
+#         return translated_content
     
-    def list(self, request, *args, **kwargs):
-        response = super().list(request, *args, **kwargs)
-        lang = self.get_language(request)
-        translated_data = [self.translate_content(item, lang) for item in response.data]
-        return Response(translated_data)
+#     def list(self, request, *args, **kwargs):
+#         response = super().list(request, *args, **kwargs)
+#         lang = self.get_language(request)
+#         translated_data = [self.translate_content(item, lang) for item in response.data]
+#         return Response(translated_data)
