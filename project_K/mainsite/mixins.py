@@ -4,9 +4,8 @@ from rest_framework.response import Response
 
 class TranslationMixin:
     def translate_text(self, text, dest_language):
-        translator = GoogleTranslator()
-        translation = translator.translate(text, dest=dest_language)
-        return translation.text
+        translator = GoogleTranslator(source='auto', target=dest_language)
+        return translator.translate(text)
 
     def translate_response(self, data, dest_language):
         if isinstance(data, list):
