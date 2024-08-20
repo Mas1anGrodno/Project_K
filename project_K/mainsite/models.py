@@ -49,7 +49,7 @@ class Tasks(models.Model):
 class Comments(models.Model):
     comment_name = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='user_coment',null=True, default=None, verbose_name="Коментарий пользователя" )
     comment_task = models.ForeignKey(Tasks, to_field='id',on_delete=models.CASCADE, related_name='task_coment', verbose_name="Коментарий к задаче" )
-    comment = models.TextField(_(blank=True, verbose_name="Коментарий"))
+    comment = models.TextField(blank=True, verbose_name="Коментарий")
     comment_create = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания коментария")
     class Meta:
         verbose_name = "Коментарии"
