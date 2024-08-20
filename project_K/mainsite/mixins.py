@@ -5,14 +5,24 @@ class LanguageMixin:
     def get_language(self, request):
         return request.query_params.get('lang', 'en')
 
+    # def translate_content(self, content, lang):
+    #     # Активируем выбранный язык
+    #     from django.utils import translation
+    #     translation.activate(lang)
+    #     translated_content = {key: _(value) for key, value in content.items()}
+    #     translation.deactivate()
+    #     return translated_content
+
     def translate_content(self, content, lang):
-        # Активируем выбранный язык
         from django.utils import translation
         translation.activate(lang)
-        translated_content = {key: _(value) for key, value in content.items()}
+        translated_content = {
+            key: _(value) if isinstance(value, str) else value
+            for key, value in content.items()
+        }
         translation.deactivate()
         return translated_content
-
+    
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
         lang = self.get_language(request)
